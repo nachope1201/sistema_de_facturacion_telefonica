@@ -8,9 +8,6 @@ import java.util.Scanner;
 public class GeneradorDeFactura {
 
     public static void main(String[] arg) throws IOException {
-        int internacionales = 0;
-        int nacionales = 0;
-        int locales = 0;
         String row;
         Llamada llamada;
         String paisDeOrigen = "Argentina";
@@ -32,16 +29,13 @@ public class GeneradorDeFactura {
                 String dia = datos[4];
                 String hora = datos[5];
                 double duracion = Double.parseDouble(datos[6]);
-                if (!(paisDeOrigen.equals(datos[1]))) {
-                    internacionales++;
+                if (!(paisDeOrigen.equals(paisDestino))) {
                     llamada = new LlamadaInternacional();
                     subTotalInternacional = subTotalInternacional + llamada.calcularCosto(duracion);
                 } else if (!(localidadOrigen.equals(localidadDestino))) {
-                    nacionales++;
                     llamada = new LlamadaNacional();
                     subTotalNacional = subTotalNacional + llamada.calcularCosto(duracion);
                 } else {
-                    locales++;
                     llamada = new LlamadaLocal(hora, dia);
                     subTotalLocal = subTotalLocal + llamada.calcularCosto(duracion);
                 }
